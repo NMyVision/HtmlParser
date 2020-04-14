@@ -8,6 +8,16 @@
     <PackageTags>NMyVision, HtmlParser</PackageTags>
     <Copyright>2019</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryType></RepositoryType>
+    <RepositoryUrl>https://github.com/NMyVision/HtmlParser</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

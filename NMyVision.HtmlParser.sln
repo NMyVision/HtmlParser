@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29721.120
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NMyVision.HtmlParser", "HtmlParser\NMyVision.HtmlParser.csproj", "{077D0649-0AC4-4485-9514-111E7268E9BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NMyVision.HtmlParserTests", "HtmlParser.Tests\NMyVision.HtmlParserTests.csproj", "{BADD00A7-23B6-4CCF-8D05-4E8CA3293426}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{077D0649-0AC4-4485-9514-111E7268E9BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077D0649-0AC4-4485-9514-111E7268E9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077D0649-0AC4-4485-9514-111E7268E9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077D0649-0AC4-4485-9514-111E7268E9BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BADD00A7-23B6-4CCF-8D05-4E8CA3293426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BADD00A7-23B6-4CCF-8D05-4E8CA3293426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BADD00A7-23B6-4CCF-8D05-4E8CA3293426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BADD00A7-23B6-4CCF-8D05-4E8CA3293426}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC64972F-6013-4F48-B57B-9EF0528107EF}
+	EndGlobalSection
+EndGlobal

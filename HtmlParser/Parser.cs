@@ -2,24 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NMyVision.HtmlParser
+namespace NMyVision
 {
-    public class Parser
+    public class HtmlParser
 	{
 		int index = 0;
+		Queue<char> q;
 
-		readonly string source;
-		readonly Queue<char> q;
 		readonly ParserOptions options;
 
-		public Parser(string source, ParserOptions options = null)
+		public string Source { get; private set; }
+		
+		public HtmlParser(ParserOptions options = null)
 		{
 			this.options = options ?? ParserOptions.Default;
-			this.source = source;
-			this.q = new Queue<char>(source);
 		}
 
-		public IEnumerable<HtmlNode> Parse(HtmlNode parent = null)
+
+		public IEnumerable<HtmlNode> Parse(string source)
+		{
+			this.Source = source;
+			this.q = new Queue<char>(source);
+			return InternalParse();
+		}
+		
+		private IEnumerable<HtmlNode> InternalParse(HtmlNode parent = null)
 		{
 			var list = new List<HtmlNode>();
 			HtmlNode node = null;
@@ -67,7 +74,7 @@ namespace NMyVision.HtmlParser
 
 					if (!q.Any())
 					{
-						node.SetEndIndex(index, source);
+						node.SetEndIndex(index, Source);
 						list.Add(node);
 						break;
 					}
@@ -79,7 +86,7 @@ namespace NMyVision.HtmlParser
 						node.EndTag = GetUpTo('>');
 						Dequeue();
 
-						node.SetEndIndex(index, source);
+						node.SetEndIndex(index, Source);
 						list.Add(node);
 					}
 					// self closing element
@@ -87,7 +94,7 @@ namespace NMyVision.HtmlParser
 					{
 						Dequeue(2);
 						node.SelfClosing = true;
-						node.SetEndIndex(index, source);
+						node.SetEndIndex(index, Source);
 						list.Add(node);
 					}
 					// self closing tags that don't have '/>' ie: <br>
@@ -109,8 +116,8 @@ namespace NMyVision.HtmlParser
 				else if (c == '>')
 				{
 					Dequeue();
-					node.Children.AddRange(Parse(node));
-					node.SetEndIndex(index, source);
+					node.AddChildren(InternalParse(node));
+					node.SetEndIndex(index, Source);
 					list.Add(node);
 				}
 				else
@@ -153,9 +160,9 @@ namespace NMyVision.HtmlParser
 		}
 
 
-		List<HtmlAttribute> GetAttributes()
+		HtmlAttributeCollection GetAttributes()
 		{
-			var attrs = new List<HtmlAttribute>();
+			var attrs = new HtmlAttributeCollection();
 
 			if (!q.Any()) return attrs;
 
@@ -172,11 +179,11 @@ namespace NMyVision.HtmlParser
 
 			return attrs;
 
-			HtmlAttribute GetAttribute()
+			KeyValuePair<string, string> GetAttribute()
 			{
 				var name = GetUpTo('=', ' ', '>');
 
-				if (q.Peek() == ' ') return new HtmlAttribute(name, null);
+				if (q.Peek() == ' ') return new KeyValuePair<string, string>(name, null);
 
 				Dequeue();
 
@@ -188,18 +195,19 @@ namespace NMyVision.HtmlParser
 						var del = Dequeue();
 						var value = GetUpTo(del);
 						Dequeue();
-						return new HtmlAttribute(name, value);
+						return new KeyValuePair<string, string>(name, value);
 					}
 					else
 					{
 						var value = GetUpTo(' ', '>', '<', '\'', '"', '=', '`');
-						return new HtmlAttribute(name, value);
+						return new KeyValuePair<string, string>(name, value);
 					}
 				}
 
-				return new HtmlAttribute(name, null);
+				return new KeyValuePair<string, string>(name, null);
 			}
 		}
+
 
 		string GetTagName() => GetUpTo(' ', '>', '/', '\r', '\n');
 

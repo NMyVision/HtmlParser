@@ -1,4 +1,4 @@
-﻿namespace NMyVision.HtmlParser
+﻿namespace NMyVision
 {
     public enum HtmlNodeType
 	{

@@ -1,19 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace NMyVision.HtmlParser
+namespace NMyVision
 {
-    public class HtmlNode
+	public partial class HtmlNode
 	{
 		private int startIndex;
 		private int endIndex;
-		public string Tag;
-		public string EndTag;
+		private List<HtmlNode> children;
 
-		public bool SelfClosing;
-		public readonly HtmlNodeType Type;
-		public string Content = null;
-		public List<HtmlAttribute> Attributes;
-		public List<HtmlNode> Children;
+		public string Tag { get; set; }
+		public string EndTag { get; set; }
+
+		public bool SelfClosing { get; set; }
+
+		public readonly HtmlNodeType Type ;
+		
+		public string Content { get; set; }
+		
+		public HtmlAttributeCollection Attributes { get; set; }
+		
+		public IEnumerable<HtmlNode> Children
+		{
+			get { return children; }
+		}
 
 		public string OuterHTML { get; private set; }
 
@@ -22,28 +32,29 @@ namespace NMyVision.HtmlParser
 			this.Type = type;
 		}
 
-		// public override string ToString() => $"{Type.ToString().ToUpper()} { Tag ?? "#text" } [ {Content} ]";
-
 		public void SetEndIndex(int index, string source)
 		{
 			endIndex = index;
 			OuterHTML = source.Substring(startIndex, endIndex - startIndex);
 		}
 
-		internal static HtmlNode CreateWhiteSpace(string content = "")
+ 		internal static HtmlNode CreateWhiteSpace(string content = "")
 			=> new HtmlNode(HtmlNodeType.Whitespace) { Content = content };
 
 		internal static HtmlNode CreateComment()
 			=> new HtmlNode(HtmlNodeType.Comment) { };
 
 		internal static HtmlNode CreateElement(int index)
-			=> new HtmlNode(HtmlNodeType.Element) { startIndex = index, Children = new List<HtmlNode>(), Attributes = new List<HtmlAttribute>() };
+			=> new HtmlNode(HtmlNodeType.Element) { startIndex = index, children = new List<HtmlNode>(), Attributes = new HtmlAttributeCollection() };
 
 		internal static HtmlNode CreateElement(string tagName)
-			=> new HtmlNode(HtmlNodeType.Element) { Tag = tagName, Children = new List<HtmlNode>(), Attributes = new List<HtmlAttribute>() };
+			=> new HtmlNode(HtmlNodeType.Element) { Tag = tagName, children = new List<HtmlNode>(), Attributes = new HtmlAttributeCollection() };
 
 		internal static HtmlNode CreateText(string content = "")
 			=> new HtmlNode(HtmlNodeType.Text) { Content = content };
 
+		internal void AddChildren(IEnumerable<HtmlNode> enumerable)
+			=> this.children.AddRange(enumerable);
+		
 	}
 }

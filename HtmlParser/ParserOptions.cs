@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NMyVision.HtmlParser
+namespace NMyVision
 {
 	/// <summary>
 	/// Options for the HtmlParser

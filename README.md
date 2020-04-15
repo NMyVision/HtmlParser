@@ -2,7 +2,7 @@
 
 Convert html string into a simple object[]. Handles real world html.
 
-![NuGet](https://img.shields.io/nuget/v/NMyVision.HtmlParser.png?style=flat-square&logo=nuget)
+![NuGet](https://img.shields.io/nuget/v/NMyVision.HtmlParser?raw=true&style=flat-square&logo=nuget)
 
 ``` cs
 Install-Package NMyVision.HtmlParser

@@ -53,7 +53,7 @@ returns this object.
 </html>
 ```
 
-To 
+To
 
 ![screenshot](docs/convert-screenshot.gif)]
 
@@ -167,3 +167,15 @@ To
   }
 ]
 ```
+
+
+## Releases
+
+1.0.2
+- Bug fix index was not reset per Parse call
+
+1.0.1
+- Refactor and code cleanup
+
+1.0.1
+- Initial Release

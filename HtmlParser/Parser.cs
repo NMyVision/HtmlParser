@@ -22,7 +22,10 @@ namespace NMyVision
 		public IEnumerable<HtmlNode> Parse(string source)
 		{
 			this.Source = source;
+
+			this.index = 0;
 			this.q = new Queue<char>(source);
+
 			return InternalParse();
 		}
 		

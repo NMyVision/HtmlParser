@@ -27,7 +27,7 @@ jobs:
         uses: rohith/publish-nuget@v2
         with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: HtmlParser/HtmlParser/NMyVision.HtmlParser.csproj
+          PROJECT_FILE_PATH: HtmlParser/NMyVision.HtmlParser.csproj
           
           # NuGet package id, used for version detection & defaults to project name
           PACKAGE_NAME: NMyVision.HtmlParser

@@ -168,10 +168,11 @@ namespace NMyVision
 			var attrs = new HtmlAttributeCollection();
 
 			if (!q.Any()) return attrs;
+			
+			SkipSpace();
 
 			if (q.Peek() == '/') return attrs;
 
-			SkipSpace();
 
 			do
 			{

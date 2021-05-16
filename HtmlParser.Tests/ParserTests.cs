@@ -17,6 +17,28 @@ namespace NMyVision.HtmlParserTests
             var result = hp.Parse("<div/>").First();
 
             Assert.AreEqual(result.Tag, "div");
+
+            Assert.IsFalse(result.Attributes.Any());
+
+            Assert.IsFalse(result.HasAttributes());
+
+            Assert.IsFalse(result.HasChildren());
+        }
+
+        [TestMethod()]
+        public void SimpleParse2Test()
+        {
+            var hp = new HtmlParser();
+
+            var result = hp.Parse("<div />").First();
+
+            Assert.AreEqual(result.Tag, "div");
+
+            Assert.IsFalse(result.Attributes.Any());
+
+            Assert.IsFalse(result.HasAttributes());
+
+            Assert.IsFalse(result.HasChildren());
         }
 
         [TestMethod()]
@@ -31,6 +53,11 @@ namespace NMyVision.HtmlParserTests
             Assert.IsTrue(result.Attributes.Contains("type"));
 
             Assert.AreEqual(result.Attributes["type"], "text");
+
+
+            Assert.IsTrue(result.HasAttributes());
+
+            Assert.IsFalse(result.HasChildren());
         }
 
 
@@ -47,6 +74,8 @@ namespace NMyVision.HtmlParserTests
             var el = parser.Parse(markup).First();
 
             parser.Parse(markup).First().Children.First();
+
+            Assert.IsTrue(el.HasChildren());
 
         }
     }

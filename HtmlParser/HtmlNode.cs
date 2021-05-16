@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NMyVision
 {
@@ -9,12 +10,12 @@ namespace NMyVision
 		private int endIndex;
 		private List<HtmlNode> children;
 
+		public HtmlNodeType Type { get; private set; }
+
 		public string Tag { get; set; }
 		public string EndTag { get; set; }
 
 		public bool SelfClosing { get; set; }
-
-		public readonly HtmlNodeType Type ;
 		
 		public string Content { get; set; }
 		
@@ -55,6 +56,20 @@ namespace NMyVision
 
 		internal void AddChildren(IEnumerable<HtmlNode> enumerable)
 			=> this.children.AddRange(enumerable);
-		
+
+		/// <summary>
+		/// Determine if children property has items.
+		/// </summary>
+		/// <returns>Returns true if children property has items, otherwise false.</returns>
+		public bool HasChildren()
+			=> this.Children?.Any() ?? false;
+
+		/// <summary>
+		/// Determine if attributes property has items.
+		/// </summary>
+		/// <returns>Returns true if attributes property has items, otherwise false.</returns>
+		public bool HasAttributes()
+			=> this.Attributes?.Any() ?? false;
+
 	}
 }

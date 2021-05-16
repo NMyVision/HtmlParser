@@ -110,9 +110,11 @@ namespace NMyVision
 					}
 					else if (node.Tag.Equals("script", StringComparison.OrdinalIgnoreCase))
 					{
-						Dequeue();
+						Dequeue(); // >
 						node.Content = GetUpTo("</script");
 						node.EndTag = "script";
+						Dequeue(9); // </script>
+						node.SetEndIndex(index, Source);
 						list.Add(node);
 					}
 				}

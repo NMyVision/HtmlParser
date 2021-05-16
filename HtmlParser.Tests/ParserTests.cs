@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace NMyVision.HtmlParserTests
@@ -76,6 +77,30 @@ namespace NMyVision.HtmlParserTests
             parser.Parse(markup).First().Children.First();
 
             Assert.IsTrue(el.HasChildren());
+
+        }
+
+        [TestMethod()]
+        public void LargeHtml()
+        {
+            var html = @"<html lang=""en"">
+    <head>
+        <title>Pug</title>
+        <script type=""text/javascript""> if (foo) bar(1 + 5) </script>
+    </head>
+    <body>
+        <h1>Pug - node template engine</h1>
+        <div id=""container"" class=""col"">
+            <p>You are amazing</p>
+            <p>Pug is a terse and simple templating language.</p>
+        </div>
+    </body>
+</html>";
+
+            var el = new HtmlParser().Parse(html).First();
+
+            Assert.AreEqual( html, el.OuterHTML );
+
 
         }
     }

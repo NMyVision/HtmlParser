@@ -193,7 +193,7 @@ namespace NMyVision
 
 				Dequeue();
 
-				if (q.Peek(2) == "''" || q.Peek(2) == "\"\"")
+				if (q.Peek(2) == "''" || q.Peek(2) == "\"\"" || q.Peek(2) == "``")
 				{
 					Dequeue(2);
 					return new KeyValuePair<string, string>(name, string.Empty);
@@ -202,7 +202,7 @@ namespace NMyVision
 				if (q.Any())
 				{
 					// attr=value is valid so check for the scenerio
-					if (q.Peek() == '\'' || q.Peek() == '"')
+					if (q.Peek() == '\'' || q.Peek() == '"' || q.Peek() == '`')
 					{
 						var del = Dequeue();
 						var value = GetUpTo(del);

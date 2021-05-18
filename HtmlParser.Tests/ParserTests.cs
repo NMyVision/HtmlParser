@@ -101,7 +101,6 @@ namespace NMyVision.HtmlParserTests
 
             Assert.AreEqual(html, el.OuterHTML);
         }
-
         [TestMethod()]
         public void EmptyAttribute()
         {
@@ -114,6 +113,21 @@ namespace NMyVision.HtmlParserTests
             Assert.AreEqual("h1", el.EndTag);
 
             Assert.AreEqual(2, el.Attributes.Count);
+
+        }
+
+        [TestMethod()]
+        public void TemplateStringAttribute()
+        {
+            var html = "<input data-json=` { \"very - long\": \"piece of\" }` />";
+
+            var el = new HtmlParser().Parse(html).First();
+
+            Assert.AreEqual(html, el.OuterHTML);
+
+            Assert.AreEqual("input", el.Tag);
+
+            Assert.AreEqual(1, el.Attributes.Count);
 
         }
     }

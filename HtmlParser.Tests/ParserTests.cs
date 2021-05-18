@@ -99,8 +99,21 @@ namespace NMyVision.HtmlParserTests
 
             var el = new HtmlParser().Parse(html).First();
 
-            Assert.AreEqual( html, el.OuterHTML );
+            Assert.AreEqual(html, el.OuterHTML);
+        }
 
+        [TestMethod()]
+        public void EmptyAttribute()
+        {
+            var html = "<h1 class=''  data-text='base'>Base</h1>";
+
+            var el = new HtmlParser().Parse(html).First();
+
+            Assert.AreEqual(html, el.OuterHTML);
+
+            Assert.AreEqual("h1", el.EndTag);
+
+            Assert.AreEqual(2, el.Attributes.Count);
 
         }
     }

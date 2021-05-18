@@ -193,6 +193,12 @@ namespace NMyVision
 
 				Dequeue();
 
+				if (q.Peek(2) == "''" || q.Peek(2) == "\"\"")
+				{
+					Dequeue(2);
+					return new KeyValuePair<string, string>(name, string.Empty);
+				}
+
 				if (q.Any())
 				{
 					// attr=value is valid so check for the scenerio

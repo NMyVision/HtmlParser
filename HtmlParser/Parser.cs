@@ -193,6 +193,8 @@ namespace NMyVision
 
 				Dequeue();
 
+				if (q.Peek() == '>') return new KeyValuePair<string, string>(name, null);
+
 				if (q.Peek(2) == "''" || q.Peek(2) == "\"\"" || q.Peek(2) == "``")
 				{
 					Dequeue(2);

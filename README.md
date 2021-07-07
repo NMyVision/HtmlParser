@@ -171,6 +171,9 @@ To
 
 ## Releases
 
+1.0.8
+- Bug fix name only attribute fix
+
 1.0.2
 - Bug fix index was not reset per Parse call
 

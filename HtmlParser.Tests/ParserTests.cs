@@ -117,6 +117,20 @@ namespace NMyVision.HtmlParserTests
         }
 
         [TestMethod()]
+        public void EmptyAttributeNoValue()
+        {
+            var html = "<h1 required>Base</h1>";
+
+            var el = new HtmlParser().Parse(html).First();
+
+            Assert.AreEqual(html, el.OuterHTML);
+
+            Assert.AreEqual("h1", el.EndTag);
+
+            Assert.AreEqual(1, el.Attributes.Count);
+        }
+
+        [TestMethod()]
         public void TemplateStringAttribute()
         {
             var html = "<input data-json=` { \"very - long\": \"piece of\" }` />";

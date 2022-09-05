@@ -189,7 +189,7 @@ namespace NMyVision
 			{
 				var name = GetUpTo('=', ' ', '>');
 
-				if (q.Peek() == ' ') return new KeyValuePair<string, string>(name, null);
+				if (q.Peek() == ' ' || q.Peek() == '>') return new KeyValuePair<string, string>(name, null);
 
 				Dequeue();
 
